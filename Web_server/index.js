@@ -1,18 +1,12 @@
-const http=require("http")
-const url=require("url")
-const myServer=http.createServer((req,res)=> {
-    const myUrl=url.parse(req.url,true)
-    switch(myUrl.pathname) {
-        case "/" :
-            res.end("This is Home Page")
-            break
-        case "/about" :
-            res.end('Hii ,${myUrl.query.username}')
-            break
-        default :
-            res.end("404 error")
-    }
-    console.log('${myUrl.pathname}')
-   
+const express=require("express")
+const app=express()
+app.get("/",(req,res)=> {
+    res.end("This is Home page");
 })
-myServer.listen(8000,()=> console.log("listening started"))
+app.get("/about",(req,res)=> {
+    res.end("Thiss is About Page "+req.query.user)
+})
+
+
+
+app.listen(8000,()=> console.log("listening started"))
